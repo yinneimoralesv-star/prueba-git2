@@ -1,0 +1,47 @@
+# matplotib libreria para hacer graficas con IA
+
+import matplotlib.pyplot as plt
+
+dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+temperaturas = [22, 24, 19, 23, 26]
+
+fig, ax = plt.subplots()
+
+ax.plot(dias, temperaturas)
+plt.show()
+
+
+-------------------------------------------------------------------------
+
+import matplotlib.pyplot as plt
+
+# 1. Definimos los datos: días de la semana y sus respectivas ventas
+dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+ventas = [1200, 950, 1100, 1400, 2100, 2500, 1800]
+
+# 2. Creamos la figura y los ejes (ajustamos el tamaño a 9x5 pulgadas)
+fig, ax = plt.subplots(figsize=(9, 5))
+
+# 3. Dibujamos un gráfico de barras (usamos ax.bar en lugar de ax.plot)
+# 'color' define el color de las barras y 'edgecolor' el borde
+barras = ax.bar(dias, ventas, color='tab:blue', edgecolor='black', alpha=0.85)
+
+# 4. Añadimos títulos y etiquetas informativas
+ax.set_title('Reporte de Ventas Diarias de la Semana', fontsize=14, fontweight='bold', pad=15)
+ax.set_xlabel('Días de la semana', fontsize=12)
+ax.set_ylabel('Ventas (en USD)', fontsize=12)
+
+# 5. Activamos la cuadrícula solo en el eje Y para que sea más fácil leer los valores
+ax.grid(axis='y', linestyle='--', alpha=0.6)
+
+# 6. Truco de profesor: Añadir el valor numérico exacto encima de cada barra
+for barra in barras:
+    altura = barra.get_height()
+    ax.annotate(f'${altura}',
+                xy=(barra.get_x() + barra.get_width() / 2, altura),
+                xytext=(0, 3),  # Desplazamiento vertical de 3 puntos
+                textcoords="offset points",
+                ha='center', va='bottom', fontsize=10, fontweight='semibold')
+
+# 7. Mostramos el gráfico finalizado
+plt.show()
